@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" src="../static/js/formvalidation.js" th:src="@{/js/formvalidation.js}"></script>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 style="text-align: center; color: blue;">List Of Student</h1>
+	<div class="container">
+		<!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#addModal">Add Student</button> or -->
+		<button class="btn btn-primary nBtn">Add Student</button>	
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<th>Dob</th>
+					<!-- <th>Password</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="st:${stud}">
+					<td th:text="${st.id}"></td>
+					<td th:text="${st.username}"></td>
+					<td th:text="${st.mobile}"></td>
+					<td th:text="${st.email}"></td>
+					<td th:text="${st.dob}"></td>
+					<!-- <td th:text="${st.password}"></td> -->
+					<td><a th:href="@{/students/getOne/(id=${st.id})}" class="btn btn-primary eBtn">Edit</a></td>
+					<td><a th:href="@{/students/delete/(id=${st.id})}" class="btn btn-danger dBtn">Delete</a></td>
+					<td><a th:href="@{/students/profile/(id=${st.id})}" class="btn btn-danger">View</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+              
+
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<form th:action="@{/students/addNew}" method="post" onsubmit="return validation()">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">New Student</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="username" class="col-form-label">Username:</label> <input
+									type="text" class="form-control" id="username" name="username">
+									<p id="namecheck" style="color: red;"></p>
+							</div>
+
+							<div class="form-group">
+								<label for="mobile" class="col-form-label">Mobile:</label>
+								<input type="text" class="form-control" id="mobile"
+									name="mobile">
+								<p id="mobilecheck" style="color: red;"></p>	
+							</div>
+
+							<div class="form-group">
+								<label for="email" class="col-form-label">Email-Id:</label>
+								<input type="email" class="form-control" id="email"
+									name="email">
+								<p id="emailcheck" style="color: red;"></p>	
+							</div>
+
+							<div class="form-group">
+								<label for="dob" class="col-form-label">Date Of Birth:</label> <input
+									type="date" class="form-control" id="dob" name="dob">
+								<p id="dobcheck" style="color: red;"></p>	
+							</div>
+							
+							<div class="form-group">
+								<label for="password" class="col-form-label">Password:</label>
+								<input type="password" class="form-control" id="password"
+									name="password">
+								<p id="passwordcheck" style="color: red;"></p>	
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+		<!--   edit model -->
+
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<form th:action="@{/students/update}" method="post">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="editid" name="id">
+							</div>
+
+							<div class="form-group">
+								<label for="username" class="col-form-label">Username:</label> <input
+									type="text" class="form-control" id="editname" name="username">
+							</div>
+
+							<div class="form-group">
+								<label for="mobile" class="col-form-label">Mobile:</label>
+								<input type="text" class="form-control" id="editmobile"
+									name="mobile">
+							</div>
+
+							<div class="form-group">
+								<label for="email" class="col-form-label">Email-Id:</label>
+								<input type="email" class="form-control" id="editemail"
+									name="email">
+							</div>
+
+							<div class="form-group">
+								<label for="dob" class="col-form-label">Date of Birth:</label> <input
+									type="date" class="form-control" id="editdob"
+									name="dob">
+							</div>
+							
+							<div class="form-group">
+								<label for="password" class="col-form-label">Password:</label>
+								<input type="password" class="form-control" id="editpassword"
+									name="password">
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Update</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- edit model ends -->
+
+		<!--  delete Model start -->
+
+		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-danger" id="exampleModalLabel">Delete
+							Modal</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="alert alert-danger">Are You Sure You Want To Delete</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a href="" class="btn btn-danger" id="delBtn">Delete</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- delete model ends -->
+	</div>
+
+</body>
+</html>

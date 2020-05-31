@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+     <h1 style="text-align: center; color: blue;">Student Profile</h1>
+       <div class="container">
+         <table class="table table-striped">
+           <tr>
+             <th>ID:</th>
+             <td th:text="${st.id}"></td>
+           </tr>
+           <tr>
+             <th>Username:</th>
+             <td th:text="${st.username}"></td>
+           </tr>
+           <tr>
+             <th>Mobile;</th>
+             <td th:text="${st.mobile}"></td>
+           </tr>
+           <tr>
+             <th>Email:</th>
+             <td th:text="${st.email}"></td>
+           </tr>
+           <tr>
+             <th>Date Of Birth:</th>
+             <td th:text="${st.dob}"></td>
+           </tr>
+           <tr>
+             <th>Password:</th>
+             <td th:text="${st.password}"></td>
+           </tr>
+         </table>
+       </div>
+</body>
+</html>

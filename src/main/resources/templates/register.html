@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" src="../static/js/formvalidation.js" th:src="@{/js/formvalidation.js}"></script>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+         <div class="container">
+  <h2 style="text-align: center;color: blue;">Registration Page</h2>
+  
+  <form th:action="@{/students/addNew1}" method="post" onsubmit="return validation()">
+  
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter Name" name="username">
+      <p id="namecheck" style="color: red;"></p>
+    </div>
+    
+    <div class="form-group">
+      <label for="mobile">Mobile:</label>
+      <input type="text" class="form-control" id="mobile" placeholder="Enter Mobile" name="mobile">
+      <p id="mobilecheck" style="color: red;"></p>	
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <p id="emailcheck" style="color: red;"></p>	
+    </div>
+    
+    <div class="form-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" class="form-control" id="dob" placeholder="Enter Date of Birth" name="dob">
+      <p id="dobcheck" style="color: red;"></p>	
+    </div>
+    
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+      <p id="passwordcheck" style="color: red;"></p>
+    </div>
+    
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>
