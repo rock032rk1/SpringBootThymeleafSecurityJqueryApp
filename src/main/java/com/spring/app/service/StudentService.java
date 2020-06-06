@@ -46,5 +46,11 @@ public class StudentService {
 		studentRepository.deleteById(id);
 	}
 	
+	public Page<Student> findPaginated(int pageNo,int pageSize){
+		
+		Pageable pageable=PageRequest.of(pageNo-1, pageSize);
+		return this.studentRepository.findAll(pageable);
+	}
+	
 
 }

@@ -35,13 +35,14 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 
-	@RequestMapping("/getAll")
-	public String getAll(Model model) {
+	@RequestMapping("/getAll/page/{pageNo}")
+	public String getAll(@PathVariable(value = "pageNo")int pageNo,Model model) {
 
-		List<Student> slist=studentService.getAll();
-		model.addAttribute("stud", slist);
+		//List<Student> slist=studentService.getAll();
+		//model.addAttribute("stud", slist);
+		return findPaginated(pageNo, model);
 
-		return "students";
+		//return "students";
 	}
 
 	@RequestMapping("/getOne")
@@ -56,7 +57,7 @@ public class StudentController {
 
 		studentService.addNew(stu);
 
-		return "redirect:/students/getAll";
+		return "redirect:/students/getAll/page/1";
 	}
 
 	// Modified method to Add a new user User
@@ -77,7 +78,7 @@ public class StudentController {
 
 		studentService.update(stu);
 
-		return "redirect:/students/getAll";
+		return "redirect:/students/getAll/page/1";
 	}
 
 	@GetMapping("/delete")
@@ -106,6 +107,20 @@ public class StudentController {
 		model.addAttribute("st", s);
 
 		return "profile";
+	}
+	
+	@GetMapping("/page/{pageNo}")
+	public String findPaginated(@PathVariable(value = "pageNo")int pageNo,Model model) {
+		int pageSize=5;
+		
+		Page<Student> page=studentService.findPaginated(pageNo, pageSize);
+		List<Student> slist=page.getContent();
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPage", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("stud", slist);
+		
+		return "students";
 	}
 	
 }
